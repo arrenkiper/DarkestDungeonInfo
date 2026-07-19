@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Stress.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BossData.cs" />
+    <Compile Include="BossSelectionHandler.cs" />
+    <Compile Include="MissionForm.Boss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MissionForm.Step2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MissionForm.Locations.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Stress.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

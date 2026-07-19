@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace DarkestDungeonInfo
@@ -26,6 +25,9 @@ namespace DarkestDungeonInfo
         private CheckBox chkShambler;
         private CheckBox chkSuccess;
 
+        public readonly Color colorDarkBg = Color.FromArgb(40, 40, 40);
+        public readonly Color colorGray = Color.FromArgb(170, 170, 170);
+
         private readonly List<string> allHeroClasses = new List<string>
         {
             "Весталка", "Разбойник", "Воитель", "Шут", "Прокаженный",
@@ -38,6 +40,10 @@ namespace DarkestDungeonInfo
         public MainForm()
         {
             this.Text = "Darkest Dungeon - Менеджер Экспедиций";
+
+            // ПРИНУДИТЕЛЬНАЯ УСТАНОВКА ИКОНКИ
+            try { this.Icon = new Icon("Stress.ico"); } catch { }
+
             this.Width = 625;
             this.Height = 735;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -46,9 +52,51 @@ namespace DarkestDungeonInfo
 
             InitializeInterfaceControls();
             SetupTableColumns();
+            ApplyMainStyle();
 
             runManager.ChangeRun(txtRunNumber.Text);
             RefreshInterface();
+        }
+
+        private void ApplyMainStyle()
+        {
+            this.BackColor = colorDarkBg;
+            this.ForeColor = colorGray;
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button btn)
+                {
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.BackColor = colorDarkBg;
+                    btn.ForeColor = colorGray;
+                    btn.FlatAppearance.BorderColor = colorGray;
+                    btn.Font = new Font("Georgia", 9, FontStyle.Bold);
+                }
+            }
+
+            btnRemoveWeek.ForeColor = Color.IndianRed;
+            btnRemoveWeek.FlatAppearance.BorderColor = Color.IndianRed;
+
+            grpMissionResults.ForeColor = colorGray;
+            foreach (Control control in grpMissionResults.Controls)
+            {
+                control.ForeColor = colorGray;
+            }
+
+            listBoxWeeks.BackColor = colorDarkBg;
+            listBoxWeeks.ForeColor = colorGray;
+
+            txtRunNumber.BackColor = colorDarkBg;
+            txtRunNumber.ForeColor = colorGray;
+            txtRunNumber.BorderStyle = BorderStyle.FixedSingle;
+
+            dgvHeroes.BackgroundColor = colorDarkBg;
+            dgvHeroes.DefaultCellStyle.BackColor = colorDarkBg;
+            dgvHeroes.DefaultCellStyle.ForeColor = colorGray;
+            dgvHeroes.ColumnHeadersDefaultCellStyle.BackColor = colorDarkBg;
+            dgvHeroes.ColumnHeadersDefaultCellStyle.ForeColor = colorGray;
+            dgvHeroes.EnableHeadersVisualStyles = false;
         }
 
         private void InitializeInterfaceControls()
@@ -64,7 +112,7 @@ namespace DarkestDungeonInfo
             btnAddWeek.Click += btnAddWeek_Click;
             this.Controls.Add(btnAddWeek);
 
-            btnRemoveWeek = new Button { Text = "Удалить неделю", Location = new Point(12, 80), Size = new Size(150, 25), ForeColor = Color.DarkRed };
+            btnRemoveWeek = new Button { Text = "Удалить неделю", Location = new Point(12, 80), Size = new Size(150, 25) };
             btnRemoveWeek.Click += btnRemoveWeek_Click;
             this.Controls.Add(btnRemoveWeek);
 
@@ -106,12 +154,12 @@ namespace DarkestDungeonInfo
             dgvHeroes.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Name", HeaderText = "Класс героя", ReadOnly = true, Width = 115, DefaultCellStyle = centerCellStyle });
             dgvHeroes.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Psychoses", HeaderText = "Психозы", ReadOnly = true, Width = 65, DefaultCellStyle = centerCellStyle });
 
-            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "+", Text = "+", UseColumnTextForButtonValue = true, Width = 35 });
-            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "-", Text = "-", UseColumnTextForButtonValue = true, Width = 35 });
+            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "+", Text = "+", UseColumnTextForButtonValue = true, Width = 35, FlatStyle = FlatStyle.Flat });
+            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "-", Text = "-", UseColumnTextForButtonValue = true, Width = 35, FlatStyle = FlatStyle.Flat });
 
             dgvHeroes.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Virtues", HeaderText = "Подъемы", ReadOnly = true, Width = 65, DefaultCellStyle = centerCellStyle });
-            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "+", Text = "+", UseColumnTextForButtonValue = true, Width = 35 });
-            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "-", Text = "-", UseColumnTextForButtonValue = true, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "+", Text = "+", UseColumnTextForButtonValue = true, Width = 35, FlatStyle = FlatStyle.Flat });
+            dgvHeroes.Columns.Add(new DataGridViewButtonColumn { HeaderText = "-", Text = "-", UseColumnTextForButtonValue = true, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FlatStyle = FlatStyle.Flat });
 
             dgvHeroes.CellContentClick += DgvHeroes_CellContentClick;
         }
@@ -166,7 +214,7 @@ namespace DarkestDungeonInfo
                         missionForm.SelectedLocation,
                         missionForm.SelectedLength,
                         missionForm.SelectedType,
-                        missionForm.SelectedHeroNames
+                        missionForm.SelectedHeroes
                     );
                     RefreshInterface();
                 }
@@ -236,4 +284,4 @@ namespace DarkestDungeonInfo
             RefreshInterface();
         }
     }
-}
+} 

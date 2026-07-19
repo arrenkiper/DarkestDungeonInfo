@@ -7,17 +7,11 @@ namespace DarkestDungeonInfo
     {
         public MissionForm(List<string> heroClasses)
         {
+            this.availableHeroes = heroClasses;
+
             InitializeComponent();
 
-            this.availableHeroes = heroClasses;
             InitializeUI();
-        }
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            this.Name = "MissionForm";
-            this.Text = "Выбор экспедиции";
-            this.ResumeLayout(false);
         }
     }
 }
