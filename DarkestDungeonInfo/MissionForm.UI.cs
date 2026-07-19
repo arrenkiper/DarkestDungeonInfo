@@ -12,8 +12,8 @@ namespace DarkestDungeonInfo
 
             panelStep1 = new Panel { Dock = DockStyle.Fill, BackColor = colorDarkBg };
 
-            panelLocationButtons = new Panel { Location = new Point(20, 20), Size = new Size(410, 250) };
-            panelTypeButtons = new FlowLayoutPanel { Location = new Point(20, 280), Size = new Size(410, 100) };
+            panelLocationButtons = new Panel { Location = new Point(20, 20), Size = new Size(410, 164) };
+            panelTypeButtons = new FlowLayoutPanel { Location = new Point(20, 194), Size = new Size(410, 100) };
 
             btnNextStep = new Button { Text = "ДАЛЕЕ", Location = new Point(20, 550), Size = new Size(405, 40), FlatStyle = FlatStyle.Flat, Font = new Font("Georgia", 9, FontStyle.Bold) };
             ApplyBaseStyle(btnNextStep);

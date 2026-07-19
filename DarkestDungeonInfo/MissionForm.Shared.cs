@@ -15,7 +15,7 @@ namespace DarkestDungeonInfo
         public List<string> availableHeroes = new List<string>();
 
         public Panel panelStep1;
-        public FlowLayoutPanel panelLocationButtons;
+        public Panel panelLocationButtons;
         public FlowLayoutPanel panelTypeButtons;
         public Button btnNextStep;
 

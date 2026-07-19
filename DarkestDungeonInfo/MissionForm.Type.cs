@@ -13,7 +13,7 @@ namespace DarkestDungeonInfo
             panelTypeButtons.Controls.Clear();
             int btnSize = 110;
             int margin = 8;
-            int columns = (SelectedLocation == "ДВОР") ? 3 : 2;
+            int columns = 3;
             int rows = (int)Math.Ceiling((double)types.Count / columns);
 
             panelTypeButtons.Width = (btnSize * columns) + (margin * (columns * 2));
